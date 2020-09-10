@@ -1,5 +1,6 @@
 package listener;
 
+import service.Impl.TypeServiceImpl;
 import service.TypeService;
 
 import javax.servlet.ServletContextEvent;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 @WebListener()
 public class ApplicationListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
-    TypeService tsService=new TypeService();
+    TypeService tsService=new TypeServiceImpl();
     // Public constructor is required by servlet spec
     public ApplicationListener() {
     }
@@ -26,7 +27,7 @@ public class ApplicationListener implements ServletContextListener,
          initialized(when the Web application is deployed). 
          You can initialize servlet context related data here.
       */
-        sce.getServletContext().setAttribute("typeList",tsService.GetAllType());
+        //sce.getServletContext().setAttribute("typeList",tsService.GetAllType());
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

@@ -1,7 +1,8 @@
-package servlet;
+package servlet.order;
 
 import model.Order;
 import model.User;
+import service.Impl.OrderServiceImpl;
 import service.OrderService;
 
 import javax.servlet.ServletException;
@@ -14,21 +15,14 @@ import java.util.List;
 
 @WebServlet(name = "order_list", urlPatterns = "/order_list")
 public class OrderListServlet extends HttpServlet {
-    private OrderService oService = new OrderService();
+    private OrderService oService = new OrderServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User u = (User) request.getSession().getAttribute("user");
-        if(u==null)
-        {
-            response.sendRedirect("/index");
-            return;
-        }
-        List<Order> list = oService.selectAll(u.getId());
-        request.setAttribute("orderList", list);
+        request.setAttribute("orderList", null);
         request.getRequestDispatcher("/order_list.jsp").forward(request, response);
     }
 }

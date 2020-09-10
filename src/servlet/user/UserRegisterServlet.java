@@ -1,24 +1,26 @@
 package servlet;
 
+import model.User;
+import org.apache.commons.beanutils.BeanUtils;
+import service.Impl.UserServiceImpl;
+import service.UserService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
-@WebServlet(name = "order_submit",urlPatterns = "/order_submit")
-public class OrderSubmitServlet extends HttpServlet {
+@WebServlet(name = "user_register",urlPatterns = "/user_rigister")
+public class UserRegisterServlet extends HttpServlet {
+    private UserService uService = new UserServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getSession().getAttribute("user")!=null) {
-            request.getRequestDispatcher("/order_submit.jsp").forward(request, response);
-        }else {
-            request.setAttribute("failMsg", "请登录后，再提交订单！");
-            request.getRequestDispatcher("/user_login.jsp").forward(request, response);
-        }
+
     }
 }

@@ -10,6 +10,7 @@ public class User {
     private String address;
     private boolean isadmin=false;
     private boolean isvalidate=false;
+
     public int getId() {
         return id;
     }

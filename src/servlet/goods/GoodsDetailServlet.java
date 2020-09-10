@@ -1,5 +1,6 @@
-package servlet;
+package servlet.goods;
 
+import model.Goods;
 import service.GoodsService;
 import service.Impl.GoodsServiceImpl;
 
@@ -9,20 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
-@WebServlet(name = "IndexServlet",urlPatterns = "/index")
-public class IndexServlet extends HttpServlet {
+@WebServlet(name = "goods_detail",urlPatterns = "/goods_detail")
+public class GoodsDetailServlet extends HttpServlet {
+
+    private GoodsService gService = new GoodsServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-    private GoodsService gService=new GoodsServiceImpl();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        //response.sendRedirect("index.jsp");
-        request.getRequestDispatcher("index.jsp").forward(request,response);
-
+        request.getRequestDispatcher("/goods_detail.jsp").forward(request, response);
     }
 }
