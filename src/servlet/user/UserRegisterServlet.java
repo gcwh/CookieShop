@@ -1,4 +1,4 @@
-package servlet;
+package servlet.user;
 
 import model.User;
 import org.apache.commons.beanutils.BeanUtils;
