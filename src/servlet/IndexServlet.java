@@ -14,14 +14,22 @@ import java.util.Map;
 
 @WebServlet(name = "IndexServlet",urlPatterns = "/index")
 public class IndexServlet extends HttpServlet {
+    private GoodsService gService=new GoodsServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-    private GoodsService gService=new GoodsServiceImpl();
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String,Object> scrollGoods=gService.getScrollGood();
+        request.setAttribute("scroll",scrollGoods);
 
+        List<Map<String,Object>>newGoods=gService.getGoodsList(3);
+        request.setAttribute("newList",newGoods);
 
-        //response.sendRedirect("index.jsp");
+        List<Map<String,Object>>hotGoods=gService.getGoodsList(2);
+        request.setAttribute("hotList",hotGoods);
+
         request.getRequestDispatcher("index.jsp").forward(request,response);
 
     }
