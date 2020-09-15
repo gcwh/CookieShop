@@ -18,7 +18,18 @@ import java.util.Date;
 public class OrderConfirmServlet extends HttpServlet {
     private OrderService oService = new OrderServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Order o=(Order)request.getSession().getAttribute("order");
+        try {
+            BeanUtils.copyProperties(o,request.getParameterMap());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        o.setDatetime(new Date());
+        o.setStatus(2);
+        o.setUser((User)request.getSession().getAttribute("user"));
+        oService.insertOrder(o);
         request.setAttribute("msg", "订单支付成功！");
         request.getRequestDispatcher("/order_success.jsp").forward(request, response);
     }

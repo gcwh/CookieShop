@@ -23,8 +23,11 @@ public class OrderListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userid=Integer.parseInt(String.valueOf(request.getSession().getAttribute("user")));
-        List<OrderItem> orderList= orderService.selectAllItem(userid);
+        User user=(User) request.getSession().getAttribute("user");
+        if(user==null){
+            response.sendRedirect("/index.jsp");
+        }
+        List<OrderItem> orderList= orderService.selectAllItem(user.getId());
         request.setAttribute("orderList", orderList);
         request.getRequestDispatcher("/order_list.jsp").forward(request, response);
     }

@@ -27,7 +27,7 @@ public class ApplicationListener implements ServletContextListener,
          initialized(when the Web application is deployed). 
          You can initialize servlet context related data here.
       */
-        //sce.getServletContext().setAttribute("typeList",tsService.GetAllType());
+        sce.getServletContext().setAttribute("typeList",tsService.GetAllType());
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
