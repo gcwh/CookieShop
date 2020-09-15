@@ -20,6 +20,9 @@ public class GoodsDetailServlet extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int id = Integer.parseInt(request.getParameter("id"));
+        Goods good = gService.getGoodsById(id);
+        request.setAttribute("g", good);
         request.getRequestDispatcher("/goods_detail.jsp").forward(request, response);
     }
 }
