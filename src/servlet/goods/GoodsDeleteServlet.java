@@ -12,9 +12,9 @@ import java.io.IOException;
 @WebServlet(name = "goods_delete",urlPatterns = "/goods_delete")
 public class GoodsDeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Order o = (Order) request.getSession().getAttribute("order");
-        int goodsid = Integer.parseInt(request.getParameter("goodsid"));
-        o.delete(goodsid);
+        Order order = (Order) request.getSession().getAttribute("order");
+        int goodsId = Integer.parseInt(request.getParameter("goodsid"));
+        order.delete(goodsId);
         response.getWriter().print("ok");
     }
 
