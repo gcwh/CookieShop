@@ -27,7 +27,7 @@ public class OrderListServlet extends HttpServlet {
         if(user==null){
             response.sendRedirect("/index.jsp");
         }
-        List<OrderItem> orderList= orderService.selectAllItem(user.getId());
+        List<Order> orderList= orderService.selectAll(2);
         request.setAttribute("orderList", orderList);
         request.getRequestDispatcher("/order_list.jsp").forward(request, response);
     }
