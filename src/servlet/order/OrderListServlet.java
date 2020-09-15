@@ -1,6 +1,7 @@
 package servlet.order;
 
 import model.Order;
+import model.OrderItem;
 import model.User;
 import service.Impl.OrderServiceImpl;
 import service.OrderService;
@@ -11,18 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "order_list", urlPatterns = "/order_list")
 public class OrderListServlet extends HttpServlet {
-    private OrderService oService = new OrderServiceImpl();
+    OrderServiceImpl orderService=new OrderServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.setAttribute("orderList", null);
+        int userid=Integer.parseInt(String.valueOf(request.getSession().getAttribute("user")));
+        List<OrderItem> orderList= orderService.selectAllItem(userid);
+        request.setAttribute("orderList", orderList);
         request.getRequestDispatcher("/order_list.jsp").forward(request, response);
     }
 }
