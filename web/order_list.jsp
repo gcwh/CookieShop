@@ -16,99 +16,84 @@
 	<script type="text/javascript" src="js/cart.js"></script>
 </head>
 <body>
-	
-	
 
+<!--header-->
+<jsp:include page="header.jsp">
+	<jsp:param name="flag" value="5"></jsp:param>
+</jsp:include>
+<!--//header-->
 
+<!--cart-items-->
+<div class="cart-items">
+	<div class="container">
+		<h2>我的订单</h2>
+		<table>
+			<tr>
+				<th width="10%">商品单号</th>
+				<th width="20%">商品详情</th>
+				<th width="10%">总价</th>
+				<th width="30%">收货信息</th>
+				<th width="10%">订单状态</th>
+				<th width="10%">支付方式</th>
+				<th width="10%">下单时间</th>
+				<th width="10%"></th>
+			</tr>
 
-
-
-	<!--header-->
-	<jsp:include page="header.jsp">
-		<jsp:param name="flag" value="5"></jsp:param>
-	</jsp:include>
-	<!--//header-->
-
-	
-	<!--cart-items-->
-	<div class="cart-items">
-		<div class="container">
-		
-		
-		
-			<h2>我的订单</h2>
-			
-				<table class="table table-bordered table-hover">
-
+			<c:forEach items="${orderList }" var="order">
 				<tr>
-					<th width="10%">ID</th>
-					<th width="10%">总价</th>
-					<th width="20%">商品详情</th>
-					<th width="30%">收货信息</th>
-					<th width="10%">订单状态</th>
-					<th width="10%">支付方式</th>
-					<th width="10%">下单时间</th>
+					<td>${order.id}</td>
+					<td>
+						<c:forEach items="${order.itemList }" var="item">
+							<p>${item.goodsName }(${item.price }) x ${item.amount }</p>
+						</c:forEach>
+					</td>
+					<td><p>${order.total }</p></td>
+					<td>
+						<p>${order.name }</p>
+						<p>${order.phone }</p>
+						<p>${order.address }</p>
+					</td>
+					<td>
+						<p>
+							<c:if test="${order.status==2 }"><span style="color:red;">已付款</span></c:if>
+							<c:if test="${order.status==3 }"><span style="color:green;">已发货</span></c:if>
+							<c:if test="${order.status==4 }"><span style="color:black;">已完成</span></c:if>
+						</p>
+					</td>
+					<td>
+						<p>
+							<c:if test="${order.paytype==1 }">微信</c:if>
+							<c:if test="${order.paytype==2 }">支付宝</c:if>
+							<c:if test="${order.paytype==3 }">货到付款</c:if>
+						</p>
+					</td>
+					<td><p>${order.datetime }</p></td>
+					<td> <button class="comfirm btn btn-danger" <c:if test="${order.status==4}">style="visibility: hidden" </c:if>>确定收货</button></td>
 				</tr>
+			</c:forEach>
 
-					<c:forEach items="${orderList }" var="order">
+		</table>
 
-						<tr>
-							<td><p>${order.id }</p></td>
-							<td><p>${order.total }</p></td>
-							<td>
-								<c:forEach items="${order.itemList }" var="item">
-									<p>${item.goodsName }(${item.price }) x ${item.amount }</p>
-								</c:forEach>
-
-							</td>
-							<td>
-								<p>${order.name }</p>
-								<p>${order.phone }</p>
-								<p>${order.address }</p>
-							</td>
-							<td>
-								<p>
-									<c:if test="${order.status==2 }"><span style="color:red;">已付款</span></c:if>
-									<c:if test="${order.status==3 }"><span style="color:green;">已发货</span></c:if>
-									<c:if test="${order.status==4 }"><span style="color:black;">已完成</span></c:if>
-
-
-								</p>
-							</td>
-							<td>
-								<p>
-
-									<c:if test="${order.paytype==1 }">微信</c:if>
-									<c:if test="${order.paytype==2 }">支付宝</c:if>
-									<c:if test="${order.paytype==3 }">货到付款</c:if>
-
-								</p>
-							</td>
-							<td><p>${order.datetime }</p></td>
-						</tr>
-
-					</c:forEach>
-
-
-
-				</table>
-			
-			
-			
-			
-		</div>
 	</div>
-	<!--//cart-items-->	
-	
-	
+</div>
+<!--//cart-items-->
 
 
+<!--footer-->
+<jsp:include page="footer.jsp"></jsp:include>
+<!--//footer-->
 
-
-	<!--footer-->
-	<jsp:include page="footer.jsp"></jsp:include>
-	<!--//footer-->
-
-
+<script>
+	$(function () {
+		$(".comfirm").click(function () {
+			var data={"id":$(this).parent().parent().children().eq(0).text()};
+			$.post("/orderComfirm",data,function(data){
+				if(data=="success"){
+					window.location.reload();
+				}
+			});
+		});
+	});
+</script>
 </body>
 </html>
