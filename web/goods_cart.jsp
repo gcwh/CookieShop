@@ -15,70 +15,79 @@
 	<script type="text/javascript" src="js/cart.js"></script>
 </head>
 <body>
-	
-	
+<!--header-->
+<jsp:include page="header.jsp">
+	<jsp:param name="flag" value="7"></jsp:param>
+</jsp:include>
+<!--//header-->
 
 
-
-
-
-	<!--header-->
-	<jsp:include page="header.jsp">
-		<jsp:param name="flag" value="7"></jsp:param>
-	</jsp:include>
-	<!--//header-->
-
-	
-	<!--cart-items-->
-	<div class="cart-items">
-		<div class="container">
-		
-		
-		
-			<h2>我的购物车</h2>
-
-
-			<c:forEach items="${order.itemMap }" var="item">
-				<div class="cart-header col-md-6">
-					<div class="cart-sec simpleCart_shelfItem">
-						<div class="cart-item cyc">
+<!--cart-items-->
+<div class="cart-items">
+	<div class="container">
+		<h2>我的购物车</h2>
+		<div class="car-headers-menu">
+			<div class="row">
+				<div class="col-md-3 car-menu">商品信息</div>
+				<div class="col-md-2 car-menu">商品参数</div>
+				<div class="col-md-1 car-menu">单价</div>
+				<div class="col-md-2 car-menu">数量</div>
+				<div class="col-md-2 car-menu">金额</div>
+				<div class="col-md-2 car-menu">操作</div>
+			</div>
+		</div>
+		<c:forEach items="${order.itemMap}" var="item">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 good-info">
 							<a href="/goods_detail?id=${item.key}">
-								<img src="${pageContext.request.contextPath }${item.value.goods.cover}" class="img-responsive">
+								<img src="${pageContext.request.contextPath }${item.value.goods.cover}" class="img-responsive" style="max-width: 60%">
 							</a>
 						</div>
-						<div class="cart-item-info">
-							<h3><a href="/goods_detail?id=${item.key}">${item.value.goods.name}</a></h3>
-							<h3><span>单价: ¥ ${item.value.price}</span></h3>
-							<h3><span>数量: ${item.value.amount}</span></h3>
-							<a class="btn btn-info" href="javascript:buy(${item.key});">增加</a>
-							<a class="btn btn-warning" href="javascript:lessen(${item.key});">减少</a>
+						<div class="col-md-2 good-info">
+							<a href="/goods_detail?id=${item.key}">${item.value.goods.name}</a>
+						</div>
+						<div class="col-md-1 good-info">
+							<span>¥ ${item.value.price}</span>
+						</div>
+						<div class="col-md-2 btn-group good-info">
+							<a class="btn btn-default" href="javascript:buy(${item.key});" >+</a>
+							<input type="text" value="${item.value.amount}" class="btn btn-default " style="width: 34px;height: 34px" readonly="readonly"/>
+							<a class="btn btn-default" href="javascript:lessen(${item.key});" >-</a>
+						</div>
+						<div class="col-md-2 good-info">
+							<span>¥ ${(item.value.price)*(item.value.amount)}</span>
+						</div>
+						<div class="col-md-2 good-info">
 							<a class="btn btn-danger" href="javascript:deletes(${item.key});">删除</a>
 						</div>
-						<div class="clearfix"></div>
 					</div>
 				</div>
-			</c:forEach>
-			
-			<div class="cart-header col-md-12">
-				<hr>
-				<h3>订单总金额: ¥ ${order.total}</h3>
-				<a class="btn btn-success btn-lg" style="margin-left:74%" href="/order_submit">提交订单</a>
 			</div>
-			
-			
-			
+		</c:forEach>
+
+
+		<div class="cart-header col-md-12">
+			<hr>
+			<h3>订单总金额: ¥ ${order.total}</h3>
+			<a class="btn btn-success btn-lg" style="margin-left:74%" href="/order_submit">提交订单</a>
 		</div>
+
+
+
 	</div>
-	<!--//cart-items-->	
-	
-	
+</div>
+<!--//cart-items-->
 
 
 
 
-	<!--footer-->
-	<jsp:include page="footer.jsp"></jsp:include>
-	<!--//footer-->
+
+
+<!--footer-->
+<jsp:include page="footer.jsp"></jsp:include>
+<!--//footer-->
 
 
 </body>
