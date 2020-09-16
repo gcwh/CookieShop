@@ -31,19 +31,19 @@
 			<h2>确认收货信息</h2>
 			<form class="form-horizontal" action="/order_confirm" method="post" id="payform">
 				<div class="row">
-					<label class="control-label col-md-1">收货人</label>
+					<label class="control-label col-md-2">收货人</label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="name" value="${user.name }" style="height:auto;padding:10px;" placeholder="输入收货人" required="required"><br>
 					</div>
 				</div>
 				<div class="row">
-					<label class="control-label col-md-1">收货电话</label>
+					<label class="control-label col-md-2">收货电话</label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="phone" value="${user.phone }" style="height:auto;padding:10px;" placeholder="输入收货电话" required="required"><br>
 					</div>
 				</div>
 				<div class="row">
-					<label class="control-label col-md-1">收货地址</label>
+					<label class="control-label col-md-2">收货地址</label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="address" value="${user.address }" style="height:auto;padding:10px;" placeholder="输入收货地址" required="required"><br>
 					</div>
