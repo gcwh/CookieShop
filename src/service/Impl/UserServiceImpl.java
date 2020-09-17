@@ -33,6 +33,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUserAddress(User user) {
+        try {
+            userDao.updateUserAddress(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public User selectById(int id) {
+        User user=null;
+        try {
+            user=userDao.selectById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public void updatePwd(User user) {
+        try {
+            userDao.updatePwd(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public boolean isUsernameExist(String username) {
         boolean isExist=false;
         try {
