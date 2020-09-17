@@ -37,11 +37,11 @@
                     <h3>用户登录</h3>
                     <div class="input">
                         <span>用户名/邮箱 <label style="color:red;">*</label></span>
-                        <input type="text" name="ue" placeholder="请输入用户名" required="required">
+                        <input type="text" name="ue" placeholder="请输入用户名" required="required" value="vili">
                     </div>
                     <div class="input">
                         <span>密码 <label style="color:red;">*</label></span>
-                        <input type="password" name="password" placeholder="请输入密码" required="required">
+                        <input type="password" name="password" placeholder="请输入密码" required="required" value="vili">
                     </div>
 
                     <div class="clearfix"></div>
