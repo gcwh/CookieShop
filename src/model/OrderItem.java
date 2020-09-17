@@ -60,4 +60,16 @@ public class OrderItem {
         this.goods = goods;
         this.order = order;
     }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", goodsName='" + goodsName + '\'' +
+                ", goods=" + goods +
+                ", order=" + order +
+                '}';
+    }
 }

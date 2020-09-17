@@ -20,5 +20,7 @@ public class OrderSubmitServlet extends HttpServlet {
             request.setAttribute("failMsg", "请登录后，再提交订单！");
             request.getRequestDispatcher("/user_login.jsp").forward(request, response);
         }
+        request.getRequestDispatcher("/order_submit.jsp").forward(request, response);
+
     }
 }
