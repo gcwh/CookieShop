@@ -41,6 +41,7 @@ public class OrderConfirmServlet extends HttpServlet {
             pay(request,response);
         }
         request.setAttribute("msg", "订单支付成功！");
+        request.getSession().removeAttribute("order");
         request.getRequestDispatcher("/order_success.jsp").forward(request, response);
 
     }
