@@ -17,6 +17,20 @@ public class UserChangePwd extends HttpServlet {
     private UserService uService = new UserServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id=Integer.parseInt(request.getParameter("id"));
+        String password= request.getParameter("password");
+        String newPassword=request.getParameter("newPassword");
+
+        User user= uService.selectById(id);
+        if(user.getPassword().equals(password)){
+            user.setPassword(newPassword);
+            uService.updatePwd(user);
+            request.getSession().setAttribute("user",uService.selectById(id));
+            request.setAttribute("msg","修改密码成功！");
+        }else {
+            request.setAttribute("failMsg","原密码错误，修改密码失败！");
+        }
+        request.getRequestDispatcher("user_center.jsp").forward(request,response);
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
