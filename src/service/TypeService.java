@@ -15,5 +15,5 @@ public interface TypeService {
 
     void update(Type type);
 
-    void delete(int id);
+    boolean delete(int id);
 }

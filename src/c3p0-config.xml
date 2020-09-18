@@ -4,9 +4,9 @@
 	<default-config>
 		<property name="driverClass">com.mysql.cj.jdbc.Driver</property>
 		<property name="jdbcUrl">
-			jdbc:mysql://localhost:3306/cakeshop?serverTimezone=GMT%2B8
+			jdbc:mysql://localhost:3306/cakeshop?serverTimezone=GMT%2B8&amp;useUnicode=true&amp;characterEncoding=utf-8
 		</property>
 		<property name="user">root</property>
-		<property name="password">123456</property>
+		<property name="password">724090</property>
 	</default-config>
 </c3p0-config>

@@ -1,5 +1,6 @@
 package service;
 
+import model.Page;
 import model.User;
 
 public interface UserService {
@@ -12,5 +13,15 @@ public interface UserService {
 
     boolean isEmailExist(String email);
 
-    void addUser(User user);
+    boolean addUser(User user);
+
+    void updateUserAddress(User user);
+
+    User selectById(int id);
+
+    void updatePwd(User user);
+
+    boolean delete(int id);
+
+    Page getUserPage(int pageNumber);
 }

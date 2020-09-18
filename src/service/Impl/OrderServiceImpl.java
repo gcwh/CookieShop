@@ -86,4 +86,32 @@ public class OrderServiceImpl implements OrderService {
             throwables.printStackTrace();
         }
     }
+
+    @Override
+    public Page getOrderPage(int status,int pageNumber) {
+        Page p = new Page();
+        p.setPageNumber(pageNumber);
+        int pageSize = 10;
+        int totalCount = 0;
+        try {
+            totalCount = orderDao.getOrderCount(status);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        p.SetPageSizeAndTotalCount(pageSize, totalCount);
+        List list=null;
+        try {
+            list = orderDao.selectOrderList(status, pageNumber, pageSize);
+            for(Order o :(List<Order>)list) {
+                List<OrderItem> l = orderDao.selectAllItem(o.getId());
+                o.setItemList(l);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        p.setList(list);
+        return p;
+    }
 }

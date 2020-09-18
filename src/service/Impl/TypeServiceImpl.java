@@ -63,11 +63,13 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         try {
             typeDao.delete(id);
+            return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
     }
 }
