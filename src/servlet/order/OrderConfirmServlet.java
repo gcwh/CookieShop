@@ -25,17 +25,20 @@ import java.util.Random;
 public class OrderConfirmServlet extends HttpServlet {
     private OrderService oService = new OrderServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Order o=(Order)request.getSession().getAttribute("order");
+        Order o = (Order) request.getSession().getAttribute("order");
         try {
-            BeanUtils.copyProperties(o,request.getParameterMap());
+            BeanUtils.copyProperties(o, request.getParameterMap());
         } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         o.setDatetime(new Date());
         o.setStatus(2);
-        o.setUser((User)request.getSession().getAttribute("user"));
+        o.setUser((User) request.getSession().getAttribute("user"));
+        request.getSession().removeAttribute("order");
         oService.insertOrder(o);
         if(o.getPaytype()==2){
             pay(request,response);

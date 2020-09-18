@@ -87,7 +87,7 @@
 	$(function () {
 		$(".comfirm").click(function () {
 			var data={"id":$(this).parent().parent().children().eq(0).text()};
-			$.post("/orderAccept",data,function(data){
+			$.post("/orderComfirm",data,function(data){
 				if(data=="success"){
 					window.location.reload();
 				}
