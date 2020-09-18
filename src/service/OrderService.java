@@ -3,6 +3,7 @@ package service;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import model.Order;
 import model.OrderItem;
+import model.Page;
 
 import java.sql.Connection;
 import java.util.List;
@@ -18,4 +19,5 @@ public interface OrderService {
     default void updateStatus(int id,int status){return;}
     default void deleteOrder(int id){return;}
     default void deleteOrderItem(int id){return;}
+    Page getOrderPage(int status, int pageNumber);
 }
