@@ -42,31 +42,7 @@ public class OrderServiceImpl implements OrderService {
         return list;
     }
 
-    @Override
-    public Page getOrderPage(int status, int pageNumber) {
-        Page p=new Page();
-        p.setPageNumber(pageNumber);
-        int pageSize=20;
-        int totalCount=0;
-        try {
-            totalCount=orderDao.getOrderCount(status);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        p.SetPageSizeAndTotalCount(pageSize,totalCount);
-        List list=null;
-        try {
-            list=orderDao.selectOrderList(status,pageNumber,pageSize);
-            for(Order o:(List<Order>)list){
-                List<OrderItem> orderItems=orderDao.selectAllItem(o.getId());
-                o.setItemList(orderItems);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        p.setList(list);
-        return p;
-    }
+
 
     @Override
     public void updateStatus(int id, int status) {
@@ -78,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteOrder(int id) {
         try {
             orderDao.deleteOrderItem(id);
             orderDao.deleteOrder(id);
